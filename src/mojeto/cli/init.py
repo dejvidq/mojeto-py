@@ -1,6 +1,7 @@
 from pathlib import Path, PurePath
 from mojeto.utils.utils import prompt_yes_no
 
+
 class Init:
 
     DEFAULT_LOCATION = str(PurePath(Path.home(), "mojeto"))
@@ -29,4 +30,3 @@ class Init:
             if truncate:
                 conf.truncate()
             conf.write(content)
-
