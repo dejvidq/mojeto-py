@@ -2,8 +2,11 @@
 
 from setuptools import find_packages, setup
 
+with open("version", "r") as f:
+    version = f.read()
+
 setup(name='mojeto',
-      version='0.0.1',
+      version=version,
       description='Mojeto',
       author='dejvidq',
       package_dir={"": "src"},
@@ -15,4 +18,7 @@ setup(name='mojeto',
               'mojeto = mojeto.mojeto:main',
           ],
       },
+      install_requires=[
+          "pyyaml"
+      ]
       )
