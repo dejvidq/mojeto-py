@@ -13,7 +13,7 @@ def main():
     args = parser.parse_args()
 
     if args.init is not None:
-        init = Init()
+        init = Init(args.init)
         init()
     elif args.add:
         add = Add()
