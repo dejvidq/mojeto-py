@@ -4,7 +4,7 @@ from mojeto.cli.add import Add
 from mojeto.cli.init import Init
 
 
-def main():
+def main() -> None:
     parser = ArgumentParser(description="Take care of your dotfiles")
     exclusive = parser.add_mutually_exclusive_group()
     exclusive.add_argument('-b', '--backup', help="Do backup", action='store_true')
@@ -14,8 +14,8 @@ def main():
     args = parser.parse_args()
 
     if args.init is not None:
-        init = Init(args.init)
+        init = Init(location=args.init)
         init()
     elif args.add:
         add = Add()
-        add(args.add)
+        add(file_path=args.add)
