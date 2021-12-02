@@ -1,20 +1,20 @@
 from pathlib import Path, PurePath
 from mojeto.utils.utils import prompt_yes_no
+from mojeto.constants import DEFAULT_CONFIG, CONFIG_PATH, CONFIG_OVERRIDE_QUESTION
 
 
 class Init:
 
-    DEFAULT_LOCATION = str(PurePath(Path.home(), "mojeto"))
+    def __init__(self, location=None):
+        if not location:
+            location = Path(CONFIG_PATH).parents[0]
+        self.repo_location = str(Path.resolve(Path(location)))
 
-    def __init__(self, location=DEFAULT_LOCATION):
-        self.repo_location = Path.resolve(Path(location))
-
-    def initialize(self):
+    def __call__(self):
         if Path(self.repo_location).is_dir():
             if Path(PurePath(self.repo_location, ".mojeto")).is_file():
-                print("Folder already exist. Do you want to override its config file? (y/N)")
-                if prompt_yes_no(default="no"):
-                    self.create_config_file(truncate=True)
+                if prompt_yes_no(question=CONFIG_OVERRIDE_QUESTION, default="no"):
+                    self.create_config_file(override=True)
             else:
                 self.create_config_file()
         else:
@@ -22,11 +22,12 @@ class Init:
             self.create_config_file()
 
     def create_working_directory(self):
-        p = Path(self.repo_location)
-        p.mkdir(parents=True, exist_ok=True)
+        path = Path(self.repo_location)
+        path.mkdir(parents=True, exist_ok=True)
 
-    def create_config_file(self, content="", truncate=False):
-        with open(PurePath(self.repo_location, ".mojeto"), "w+") as conf:
-            if truncate:
+    def create_config_file(self, override=False):
+        content = DEFAULT_CONFIG.replace("REPO_LOCATION", self.repo_location)
+        with open(PurePath(CONFIG_PATH), "w+") as conf:
+            if override:
                 conf.truncate()
             conf.write(content)
