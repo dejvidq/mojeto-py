@@ -12,7 +12,7 @@ class Init:
 
     def __call__(self):
         if Path(self.repo_location).is_dir():
-            if Path(PurePath(self.repo_location, ".mojeto")).is_file():
+            if Path(PurePath(CONFIG_PATH)).is_file():
                 if prompt_yes_no(question=CONFIG_OVERRIDE_QUESTION, default="no"):
                     self.create_config_file(override=True)
             else:
