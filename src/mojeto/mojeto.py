@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
-from mojeto.cli.init import Init
+
 from mojeto.cli.add import Add
+from mojeto.cli.init import Init
 
 
 def main():

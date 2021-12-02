@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from mojeto.config import Config
 
 
