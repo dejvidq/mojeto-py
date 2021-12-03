@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 
 from mojeto.cli.add import Add
+from mojeto.cli.backup import Backup
 from mojeto.cli.init import Init
 
 
@@ -19,3 +20,6 @@ def main() -> None:
     elif args.add:
         add = Add()
         add(file_path=args.add)
+    elif args.backup:
+        backup = Backup()
+        backup()

@@ -26,3 +26,9 @@ class Config:
     def write_config(self) -> None:
         with open(self.config_path, "w") as conf_file:
             conf_file.write(yaml.safe_dump(self.config))
+
+    def get_all_files(self) -> dict[str, str]:
+        files = {}
+        for name, path in self.config[1]['files'].items():
+            files[name] = path['path']
+        return files
