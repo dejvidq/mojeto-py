@@ -10,6 +10,7 @@ class Config:
         self.config = self.open_config()
         if self.config[1]['files'] is None:
             self.config[1]['files'] = {}
+        self.repo_location = self.config[0]['files_location']['path']
 
     def open_config(self) -> list:
         with open(self.config_path, "r") as conf_file:
