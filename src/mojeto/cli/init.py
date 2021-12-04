@@ -26,9 +26,10 @@ class Init:
         path = Path(self.repo_location)
         path.mkdir(parents=True, exist_ok=True)
 
-    def create_config_file(self, override=False) -> None:
+    def create_config_file(self, override=False, config_path=CONFIG_PATH) -> None:
+        print(f"CONFIG: {config_path}")
         content = DEFAULT_CONFIG.replace("REPO_LOCATION", self.repo_location)
-        with open(PurePath(CONFIG_PATH), "w+") as conf:
+        with open(PurePath(config_path), "w+") as conf:
             if override:
                 conf.truncate()
             conf.write(content)
