@@ -1,5 +1,7 @@
 [flake8]
-application-import-names = mojeto
+application-import-names = 
+    src
+	mojeto
 import-order-style = google
 select = C,E,F,I,W
 max-line-length = 120
