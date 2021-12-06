@@ -1,12 +1,6 @@
-from pathlib import Path, PurePath
-import random
-import string
+from pathlib import Path
 
-import pytest
-
-
-from mojeto.cli.init import Init
-from mojeto.constants import CONFIG_PATH
+from src.mojeto.cli.init import Init
 
 
 class TestInit:
@@ -23,10 +17,9 @@ class TestInit:
         mojeto_init_obj.create_config_file(config_path=config_file)
         assert config_file.is_file()
 
-    def test_init_create_config_file_override(self, monkeypatch, generate_random_repo_with_config):
+    def test_init_create_config_file_override(self, generate_random_repo_with_config):
         repo_location = generate_random_repo_with_config
         config_file = Path(f"{repo_location}/.mojeto")
         mojeto_init_obj = Init(location=repo_location)
         mojeto_init_obj.create_config_file(config_path=config_file, override=True)
         assert config_file.is_file()
-
