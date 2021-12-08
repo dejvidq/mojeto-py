@@ -4,7 +4,7 @@ import string
 
 import pytest
 
-from src.mojeto.cli.init import Init
+from mojeto.cli.init import Init
 
 
 @pytest.fixture

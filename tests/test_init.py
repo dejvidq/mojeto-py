@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from src.mojeto.cli.init import Init
+from mojeto.cli.init import Init
 
 
 class TestInit:

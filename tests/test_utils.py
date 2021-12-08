@@ -1,6 +1,6 @@
 import pytest
 
-from src.mojeto.utils.utils import prompt_yes_no
+from mojeto.utils.utils import prompt_yes_no
 
 
 class TestUtils:

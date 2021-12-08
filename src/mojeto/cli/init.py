@@ -1,7 +1,7 @@
 from pathlib import Path, PurePath
 
-from src.mojeto.constants import CONFIG_OVERRIDE_QUESTION, CONFIG_PATH, DEFAULT_CONFIG
-from src.mojeto.utils.utils import prompt_yes_no
+from mojeto.constants import CONFIG_OVERRIDE_QUESTION, CONFIG_PATH, DEFAULT_CONFIG
+from mojeto.utils.utils import prompt_yes_no
 
 
 class Init:
