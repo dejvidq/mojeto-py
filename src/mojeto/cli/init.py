@@ -6,9 +6,8 @@ from mojeto.utils.utils import prompt_yes_no
 
 class Init:
 
-    def __init__(self, location=None) -> None:
-        if not location:
-            location = Path(CONFIG_PATH).parents[0]
+    def __init__(self, location=CONFIG_PATH) -> None:
+        location = Path(location).parents[0]
         self.repo_location = str(Path.resolve(Path(location)))
 
     def __call__(self) -> None:
@@ -27,7 +26,6 @@ class Init:
         path.mkdir(parents=True, exist_ok=True)
 
     def create_config_file(self, override=False, config_path=CONFIG_PATH) -> None:
-        print(f"CONFIG: {config_path}")
         content = DEFAULT_CONFIG.replace("REPO_LOCATION", self.repo_location)
         with open(PurePath(config_path), "w+") as conf:
             if override:

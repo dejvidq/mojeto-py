@@ -1,3 +1,5 @@
+import os
+from pathlib import Path
 import random
 import shutil
 import string
@@ -5,28 +7,36 @@ import string
 import pytest
 
 from mojeto.cli.init import Init
+from mojeto.constants import CONFIG_PATH
 
 
 @pytest.fixture
-def random_repo_name():
-    repo_name = ''.join(random.choices(string.ascii_letters + string.digits, k=10))
-    repo_path = f"/tmp/{repo_name}"
-    yield repo_path
-    shutil.rmtree(repo_path, ignore_errors=True)
+def repo_name():
+    repo_location = Path(CONFIG_PATH).parents[0]
+    Path(repo_location).mkdir(parents=True, exist_ok=True)
+    yield repo_location
 
 
 @pytest.fixture
-def generate_random_repo(random_repo_name):
-    mojeto_init = Init(random_repo_name)
+def generate_repo():
+    mojeto_init = Init()
     mojeto_init.create_working_directory()
     yield mojeto_init.repo_location
     shutil.rmtree(mojeto_init.repo_location, ignore_errors=True)
 
 
 @pytest.fixture
-def generate_random_repo_with_config(random_repo_name):
-    mojeto_init = Init(random_repo_name)
+def generate_repo_with_config():
+    mojeto_init = Init()
     mojeto_init.create_working_directory()
-    mojeto_init.create_config_file(config_path=f"{mojeto_init.repo_location}/.mojeto")
+    mojeto_init.create_config_file(config_path=CONFIG_PATH)
     yield mojeto_init.repo_location
     shutil.rmtree(mojeto_init.repo_location, ignore_errors=True)
+
+
+@pytest.fixture
+def generate_repo_without_config():
+    path = Path(CONFIG_PATH).parents[0]
+    path.mkdir(parents=True, exist_ok=True)
+    yield str(path)
+    shutil.rmtree(str(path), ignore_errors=True)
