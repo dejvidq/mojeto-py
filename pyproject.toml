@@ -1,3 +1,14 @@
 [build-system]
 requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
+
+[tool.coverage.run]
+omit = [
+    'src/mojeto/mojeto.py',
+	'src/mojeto/__main__.py'
+	]
+source = ['src']
+
+[tool.coverage.report]
+show_missing = true
+skip_empty = true

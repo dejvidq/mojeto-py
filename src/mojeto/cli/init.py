@@ -7,7 +7,8 @@ from mojeto.utils.utils import prompt_yes_no
 class Init:
 
     def __init__(self, location=CONFIG_PATH) -> None:
-        location = Path(location).parents[0]
+        if not location:
+            location = Path(CONFIG_PATH).parents[0]
         self.repo_location = str(Path.resolve(Path(location)))
 
     def __call__(self) -> None:
