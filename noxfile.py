@@ -1,7 +1,7 @@
 import os
 import random
-import string
 import shutil
+import string
 
 import nox
 
@@ -23,7 +23,5 @@ def test(session):
     generated_sdist = os.path.join(sdist_dir, generated_files[0])
     session.install(generated_sdist, "pytest")
     mojeto_config_location = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-    print("nox: ", mojeto_config_location)
-    print(os.environ)
     os.environ["MOJETO_CONFIG_LOCATION"] = f"/tmp/{mojeto_config_location}"
-    session.run("pytest")
+    session.run("pytest", "-vs")

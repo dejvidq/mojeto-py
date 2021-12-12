@@ -1,5 +1,6 @@
-from mojeto.cli.init import Init
 from pathlib import Path
+
+from mojeto.cli.init import Init
 
 
 class TestInit:
@@ -11,5 +12,3 @@ class TestInit:
         init_obj()
         assert Path(repo_location).is_dir()
         assert Path(f"{repo_location}/.mojeto").is_file()
-
-
