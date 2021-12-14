@@ -49,4 +49,3 @@ class TestInit:
         init_obj()
         assert Path(init_obj.repo_location).is_dir()
         assert Path(init_obj.config_path).is_file()
-

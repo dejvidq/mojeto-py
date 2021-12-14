@@ -3,6 +3,7 @@ import pytest
 from mojeto.cli.add import Add
 from mojeto.config import Config
 
+
 class TestAdd:
 
     @pytest.mark.usefixtures("init")

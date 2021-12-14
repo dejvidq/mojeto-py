@@ -5,6 +5,8 @@ import shutil
 import string
 
 import pytest
+
+from mojeto.cli.add import Add
 from mojeto.cli.init import Init
 
 
@@ -54,3 +56,17 @@ def tmp_file():
         pass
     yield file
     os.remove(file)
+
+
+@pytest.fixture
+def init_with_file():
+    file = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
+    file = f"/tmp/{file}"
+    with open(file, "w+") as f:
+        f.write("BEFORE")
+    init = Init("")
+    init()
+    add = Add()
+    add(file)
+    yield init, file
+    shutil.rmtree(path=init.repo_location, ignore_errors=True)
