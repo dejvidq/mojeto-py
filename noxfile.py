@@ -22,6 +22,4 @@ def test(session):
     assert len(generated_files) == 1
     generated_sdist = os.path.join(sdist_dir, generated_files[0])
     session.install(generated_sdist, "pytest")
-    mojeto_config_location = ''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(6))
-    os.environ["MOJETO_CONFIG_LOCATION"] = f"/tmp/{mojeto_config_location}"
-    session.run("pytest", "-vs")
+    session.run("pytest", "-sv")
