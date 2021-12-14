@@ -22,7 +22,7 @@ jobs:
         pip install .
     - name: Run coverage
       run: |
-        coverage run -m pytest
+        coverage run --source src -m pytest
         coverage report
       env:
         MOJETO_CONFIG_LOCATION: /tmp/mojeto
