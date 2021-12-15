@@ -24,3 +24,15 @@ class TestAdd:
         add(tmp_file)
         config = Config()
         assert len(config.get_all_files()) == 1
+
+    @pytest.mark.usefixtures("init")
+    def test_add_file_is_not_exist(self, capfd):
+        config = Config()
+        assert not config.get_all_files()
+        add = Add()
+        file_does_not_exist = "/this/file/does/not/exist"
+        add(file_does_not_exist)
+        config = Config()
+        assert not config.get_all_files()
+        out, _ = capfd.readouterr()
+        assert out.strip() == f"File {file_does_not_exist} does not exist. Omitting"
