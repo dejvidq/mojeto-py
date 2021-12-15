@@ -6,10 +6,11 @@ from mojeto.utils.utils import prompt_yes_no
 
 class Init:
 
-    def __init__(self, location=None) -> None:
+    def __init__(self, location) -> None:
         if not location:
             location = Path(CONFIG_PATH).parents[0]
         self.repo_location = str(Path.resolve(Path(location)))
+        self.config_path = CONFIG_PATH
 
     def __call__(self) -> None:
         if Path(self.repo_location).is_dir():
@@ -28,7 +29,7 @@ class Init:
 
     def create_config_file(self, override=False) -> None:
         content = DEFAULT_CONFIG.replace("REPO_LOCATION", self.repo_location)
-        with open(PurePath(CONFIG_PATH), "w+") as conf:
+        with open(PurePath(self.config_path), "w+") as conf:
             if override:
                 conf.truncate()
             conf.write(content)

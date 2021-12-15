@@ -2,7 +2,7 @@
 
 from setuptools import find_packages, setup
 
-with open("version", "r") as f:
+with open("src/mojeto/version", "r") as f:
     version = f.read()
 
 setup(name='mojeto',
@@ -20,5 +20,6 @@ setup(name='mojeto',
       },
       install_requires=[
           "pyyaml"
-      ]
+      ],
+      package_data={'mojeto': ['version']}
       )
