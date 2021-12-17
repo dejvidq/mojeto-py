@@ -5,7 +5,7 @@ def prompt_yes_no(question, default="yes"):
         "no": False,
         "n": False
     }
-    options = "(Y/n)" if default == "yes" else "(y/N)"
+    options = "(Y/n)" if default in ["yes", "y"] else "(y/N)"
 
     choice = input(f"{question} {options}: ").lower()
     if choice in choices:
