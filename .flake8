@@ -1,7 +1,13 @@
 [flake8]
+application-import-names = 
+    src
+	mojeto
+import-order-style = google
+select = C,E,F,I,W
 max-line-length = 120
 exclude =
     .git,
 	__pycache__,
 	venv,
-	.nox
+	.nox,
+	.github

@@ -1,0 +1,28 @@
+name: test
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip pytest coverage[toml]
+        pip install -r requirements.txt
+    - name: Install tested app
+      run: |
+        pip install .
+    - name: Run coverage
+      run: |
+        coverage run --source src -m pytest
+        coverage report
+      env:
+        MOJETO_CONFIG_LOCATION: /tmp/mojeto
