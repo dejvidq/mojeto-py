@@ -18,7 +18,9 @@ class Apply:
                     shutil.copy(src=Path(PurePath(self.config.repo_location, file)), dst=Path(PurePath(file, path)))
                 elif prompt_yes_no(question=f"Path {path} does not exist. Do you want to create it?"):
                     # create path
+                    p = Path(path)
+                    p.mkdir(parents=True, exist_ok=True)
                     # copy file
-                    pass
+                    shutil.copy(src=Path(PurePath(self.config.repo_location, file)), dst=Path(PurePath(file, path)))
                 else:
                     print(f"Path {path} does not exist. Omitting")
