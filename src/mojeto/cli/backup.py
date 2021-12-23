@@ -2,6 +2,7 @@ from pathlib import Path, PurePath
 import shutil
 
 from mojeto.config import Config
+from mojeto.constants import CONFIG_PATH
 
 
 class Backup:
@@ -17,3 +18,7 @@ class Backup:
                 shutil.copy(src=file_path, dst=self.config.repo_location)
             else:
                 print(f"File {file_path} does not exist. Omitting")
+        try:
+            shutil.copy(src=CONFIG_PATH, dst=self.config.repo_location)
+        except shutil.SameFileError:
+            pass

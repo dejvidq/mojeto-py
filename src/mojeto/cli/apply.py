@@ -2,6 +2,7 @@ from pathlib import Path, PurePath
 import shutil
 
 from mojeto.config import Config
+from mojeto.constants import CONFIG_PATH
 from mojeto.utils.utils import prompt_yes_no
 
 
@@ -24,3 +25,7 @@ class Apply:
                     shutil.copy(src=Path(PurePath(self.config.repo_location, file)), dst=Path(PurePath(file, path)))
                 else:
                     print(f"Path {path} does not exist. Omitting")
+            try:
+                shutil.copy(src=str(PurePath(self.config.repo_location, ".mojeto")), dst=CONFIG_PATH)
+            except shutil.SameFileError:
+                pass
