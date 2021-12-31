@@ -10,8 +10,6 @@ class Add:
 
     def __call__(self, file_path) -> None:
         src_path = Path(file_path)
-        import pdb
-        pdb.set_trace()
         if src_path.is_file():
             file_to_add_name = src_path.name
             file_to_add_path = self.prepare_file_path(src_path)
