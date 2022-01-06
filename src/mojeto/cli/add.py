@@ -9,7 +9,7 @@ class Add:
         self.config = Config()
 
     def __call__(self, file_path) -> None:
-        src_path = Path(file_path)
+        src_path = Path(file_path).resolve()
         if src_path.is_file():
             file_to_add_name = src_path.name
             file_to_add_path = self.prepare_file_path(src_path)
@@ -21,5 +21,5 @@ class Add:
         path = src_path.parents[0]
         home = Path.home()
         if home in src_path.parents:
-            path = Path(src_path.as_posix().replace(home.as_posix(), "%HOME%", 1))
+            path = Path(src_path.parents[0].as_posix().replace(home.as_posix(), "%HOME%", 1))
         return path.as_posix()
