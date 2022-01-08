@@ -1,3 +1,6 @@
+from pathlib import Path
+
+
 def prompt_yes_no(question, default="yes"):
     choices = {
         "yes": True,
@@ -14,3 +17,15 @@ def prompt_yes_no(question, default="yes"):
         return choices[default]
     else:
         return choices["no"]
+
+
+def encode_file_path(src_path: Path):
+    path = src_path.parent
+    home = Path.home()
+    if home in src_path.parents:
+        path = Path(src_path.parents[0].as_posix().replace(home.as_posix(), "%HOME%", 1))
+    return path.as_posix()
+
+
+def decode_file_path(path: str):
+    return path.replace("%HOME%", Path.home().as_posix())
