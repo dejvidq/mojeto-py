@@ -1,5 +1,6 @@
 import yaml
 
+from mojeto.utils.utils import decode_file_path
 from .constants import CONFIG_PATH
 
 
@@ -17,7 +18,7 @@ class Config:
             yaml_conf = yaml.safe_load(conf_file.read())
         return yaml_conf
 
-    def add_file(self, file_name, file_path) -> None:
+    def add_file(self, file_name: str, file_path: str) -> None:
         self.config[1]['files'][file_name] = {
             "path": file_path
         }
@@ -32,3 +33,10 @@ class Config:
         for name, path in self.config[1]['files'].items():
             files[name] = path['path']
         return files
+
+    def remove_file(self, name: str, path: str):
+        if name in self.config[1]['files'].keys() and self.config[1]['files'][name]['path'] == path:
+            del self.config[1]['files'][name]
+            self.write_config()
+        else:
+            print(f"File {name} pointing to path '{decode_file_path(path)}' not found. Ommiting.")

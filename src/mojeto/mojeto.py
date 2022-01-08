@@ -4,6 +4,7 @@ from mojeto.cli.add import Add
 from mojeto.cli.apply import Apply
 from mojeto.cli.backup import Backup
 from mojeto.cli.init import Init
+from mojeto.cli.remove import Remove
 
 
 def main() -> None:
@@ -13,6 +14,7 @@ def main() -> None:
     exclusive.add_argument('-b', '--backup', help="Do backup", action='store_true')
     exclusive.add_argument('-i', '--init', help="Initialize configuration", nargs="?", const="")
     exclusive.add_argument('-p', '--apply', help="Apply files from repository to system", action="store_true")
+    exclusive.add_argument('-r', '--remove', help="Remove file from config and repo")
 
     args = parser.parse_args()
 
@@ -28,3 +30,6 @@ def main() -> None:
     elif args.apply:
         apply = Apply()
         apply()
+    elif args.remove:
+        remove = Remove()
+        remove(args.remove)
