@@ -7,5 +7,5 @@ DEFAULT_CONFIG = """
 - files:
 """
 
-CONFIG_PATH = str(PurePath(Path.home(), ".config", "mojeto", ".mojeto"))
+CONFIG_PATH = PurePath(Path.home(), ".config", "mojeto", ".mojeto").as_posix()
 CONFIG_OVERRIDE_QUESTION = "Mojeto config already exist. Do you want to override it?"
