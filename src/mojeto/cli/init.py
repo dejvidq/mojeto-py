@@ -2,7 +2,7 @@ from pathlib import Path, PurePath
 import shutil
 
 from mojeto.constants import CONFIG_OVERRIDE_QUESTION, CONFIG_PATH, DEFAULT_CONFIG
-from mojeto.utils.utils import prompt_yes_no
+from mojeto.utils.utils import prompt_yes_no, update_path_in_config
 
 
 class Init:
@@ -44,5 +44,5 @@ class Init:
             conf.write(content)
 
     def apply_config_from_repo(self) -> None:
-        # zmiana repo_location w tym kopiowanym configu na ścieżkę podaną jako argument
         shutil.copy(src=PurePath(self.repo_location, ".mojeto"), dst=CONFIG_PATH)
+        update_path_in_config(self.repo_location)

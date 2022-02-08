@@ -1,5 +1,9 @@
 from pathlib import Path
 
+import yaml
+
+from mojeto.constants import CONFIG_PATH
+
 
 def prompt_yes_no(question, default="yes"):
     choices = {
@@ -29,3 +33,11 @@ def encode_file_path(src_path: Path):
 
 def decode_file_path(path: str):
     return path.replace("%HOME%", Path.home().as_posix())
+
+
+def update_path_in_config(new_path: str):
+    with open(CONFIG_PATH, 'r') as f:
+        config_content = yaml.safe_load(f.read())
+    config_content[0]['files_location']['path'] = new_path
+    with open(CONFIG_PATH, 'w') as f:
+        yaml.dump(config_content, f)
